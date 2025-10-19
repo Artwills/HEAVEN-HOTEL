@@ -1,0 +1,743 @@
+
+/*
+==============================
+   Heaven Hotel Mbale CSS
+   Author: Art Technologies
+   Theme: Elegant, Warm, Responsive
+   Note: Consolidated styles for all sections (pages)
+==============================
+*/
+
+/* --- 1. CSS Variables and Base Setup --- */
+
+:root {
+    /* Colors */
+    --color-primary: #38761D; /* Forest Green */
+    --color-secondary: #B48A3A; /* Warm Gold */
+    --color-dark: #222222;
+    --color-light: #f4f4f4;
+    --color-white: #ffffff;
+    
+    /* Fonts */
+    --font-primary: 'Poppins', sans-serif;
+    
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
+
+    /* Border Radius & Shadow */
+    --border-radius: 8px;
+    --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    color: var(--color-dark);
+    background-color: var(--color-white);
+    overflow-x: hidden; /* Prevents horizontal scroll from animations */
+}
+
+/* --- 2. Utility Classes and Layouts --- */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.section {
+    padding: var(--spacing-lg) 0;
+}
+
+.bg-light {
+    background-color: var(--color-light);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+.section-header h2 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+}
+
+/* Grid Layouts */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.other-services-grid {
+    /* For other services section */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.split-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.split-content .content-text,
+.split-content .content-image {
+    flex: 1;
+}
+
+.split-content img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+}
+
+/* --- 3. Buttons (CTAs) --- */
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 50px; 
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background: var(--color-secondary);
+    color: var(--color-white);
+    border-color: var(--color-secondary);
+}
+
+.btn-primary:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-secondary {
+    background: var(--color-white);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn-primary-outline {
+    background: transparent;
+    color: var(--color-secondary);
+    border-color: var(--color-secondary);
+}
+
+.btn-primary-outline:hover {
+    background: var(--color-secondary);
+    color: var(--color-white);
+}
+
+.btn-secondary-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-secondary-outline:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* --- 4. Header & Navigation --- */
+
+#main-header {
+    background: var(--color-white);
+    box-shadow: var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0.8rem 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-dark);
+    text-decoration: none;
+}
+
+.logo .accent {
+    color: var(--color-secondary);
+}
+
+#nav-links a {
+    color: var(--color-dark);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+#nav-links a:hover,
+#nav-links a.active {
+    color: var(--color-secondary);
+}
+
+.nav-ctas {
+    display: block; 
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-dark);
+}
+
+/* --- 5. Page Management (SPA Logic) --- */
+.page-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    display: none;
+}
+
+.page-section.active {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+}
+
+.page-section.hidden {
+    display: none;
+}
+
+
+/* --- 6. HOME Page Styles --- */
+
+.hero {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    background: url('https://placehold.co/1200x700/38761D/ffffff?text=Heaven+Hotel+Mbale+Hero') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-white);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 300;
+}
+
+.hero-ctas .btn {
+    margin: 0 0.5rem;
+}
+
+.value-props {
+    text-align: center;
+    padding-top: var(--spacing-md);
+    margin-top: calc(var(--spacing-md) * -1); 
+}
+
+.prop-card {
+    background-color: var(--color-white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.prop-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.prop-card i {
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.prop-card h3 {
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+}
+
+
+/* --- 7. SERVICES Page Styles --- */
+
+.room-card {
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    overflow: hidden;
+    text-align: center;
+    padding: var(--spacing-md);
+    transition: transform 0.3s;
+}
+.room-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+.room-card img {
+    width: 100%; 
+    border-radius: var(--border-radius); 
+    margin-bottom: var(--spacing-sm);
+}
+.room-card h3 {
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-xs);
+}
+.room-card p {
+    margin-bottom: var(--spacing-sm);
+}
+.room-card .price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    display: block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.other-service-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm);
+    border-bottom: 1px dashed var(--color-secondary);
+}
+.other-service-item i {
+    color: var(--color-secondary);
+    font-size: 1.5rem;
+    margin-right: var(--spacing-sm);
+    width: 30px;
+    text-align: center;
+}
+.other-service-item p {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* --- 8. GALLERY Page Styles (Lightbox/Grid) --- */
+.gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.caption-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(56, 118, 29, 0.8); /* Primary Green with opacity */
+    color: var(--color-white);
+    padding: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+
+/* --- 9. CONTACT Page Styles --- */
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    color: var(--color-primary);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: var(--spacing-sm);
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-family: var(--font-primary);
+    transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--color-secondary);
+}
+
+.contact-info-block {
+    padding: var(--spacing-md);
+    background: var(--color-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.info-item i {
+    color: var(--color-secondary);
+    font-size: 1.25rem;
+    margin-right: var(--spacing-sm);
+    width: 30px; 
+    text-align: center;
+}
+
+.info-item a {
+    color: var(--color-dark);
+    text-decoration: none;
+}
+.info-item a:hover {
+    color: var(--color-primary);
+}
+
+.map-container {
+    margin-top: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-hover);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 450px;
+    border: 0;
+}
+
+
+/* --- 10. Modals (Menu and Lightbox) --- */
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7); 
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: var(--color-white);
+    margin: 5% auto; 
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    width: 90%; 
+    max-width: 700px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: modalOpen 0.5s;
+}
+
+.modal-content.lightbox-content {
+    /* Specific styles for the lightbox image */
+    max-width: 900px;
+    margin: auto;
+    display: block;
+    width: 80%;
+}
+#lightbox-caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+@keyframes modalOpen {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.close-btn {
+    color: var(--color-light);
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    font-size: 40px;
+    font-weight: bold;
+    transition: color 0.3s;
+    z-index: 2001;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--color-secondary);
+}
+
+.menu-category h4 {
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-secondary);
+    padding-bottom: 0.5rem;
+    margin-top: var(--spacing-sm);
+}
+
+
+/* --- 11. Floating WhatsApp Button --- */
+
+.whatsapp-float {
+    position: fixed;
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 60px;
+    height: 60px;
+    background-color: #25D366; 
+    color: var(--color-white);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+    font-size: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 900;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+
+/* --- 12. Footer --- */
+
+footer {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    padding: var(--spacing-md) 0 0;
+    font-size: 0.9rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: var(--spacing-md);
+}
+
+.footer-section h4 {
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section a {
+    color: var(--color-light);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a:hover {
+    color: var(--color-secondary);
+}
+
+.footer-section.social a {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-right: var(--spacing-sm);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- 13. Animation Effects (JS Triggered) --- */
+
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transition-delay: 0.1s;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.delay-2 { animation-delay: 0.2s; }
+.delay-4 { animation-delay: 0.4s; }
+
+
+/* --- 14. Responsive Design (Mobile First) --- */
+
+@media (max-width: 992px) {
+    /* Mobile Menu */
+    #nav-links {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        width: 100%;
+        background-color: var(--color-white);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+        z-index: 999;
+    }
+    
+    #nav-links.active {
+        display: flex; 
+        animation: slideDown 0.3s ease-out;
+    }
+
+    #nav-links a {
+        padding: 0.75rem var(--spacing-md);
+        border-bottom: 1px solid var(--color-light);
+    }
+    
+    .hamburger {
+        display: block;
+    }
+    
+    .nav-ctas {
+        display: none;
+    }
+
+    /* General Layout */
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .split-content {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+    
+    .split-content .content-image {
+        order: -1; 
+    }
+    
+    .reverse-on-mobile .content-text {
+        order: -1;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-info-block {
+        order: -1; 
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .footer-section.social a {
+        margin: 0 0.5rem;
+    }
+
+    .modal-content {
+        margin: 15% auto;
+    }
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
